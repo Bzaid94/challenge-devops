@@ -29,7 +29,10 @@ jobs:
           cache: maven
 
       - name: Build project maven
-        run: mvn clean verify
+        run: mvn clean compile
+
+      - name: Run test units
+        run: mvn verify
 
       - name: Analysis with SonarCloud
         run: |
