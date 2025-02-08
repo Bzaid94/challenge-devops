@@ -10,7 +10,7 @@ on:
 env:
   SONAR_HOST: ${{ vars.SONAR_HOST }}
   SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
-  SONAR_PROJECT_KEY: ${{ github.event.repository.name }}
+  SONAR_PROJECT_KEY: Bzaid94_challenge-devops
 
 jobs:
   build:
@@ -41,6 +41,7 @@ jobs:
           -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
           -Dsonar.host.url=${{ env.SONAR_HOST }} \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.branch.name=main \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       - name: Build Docker image
