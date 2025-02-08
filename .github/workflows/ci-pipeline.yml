@@ -24,3 +24,6 @@ jobs:
 
       - name: Compile project
         run: mvn clean compile -DskipTests
+
+      - name: Run Unit Tests
+        run: mvn test
