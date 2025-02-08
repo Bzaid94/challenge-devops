@@ -10,7 +10,7 @@ on:
 env:
   SONAR_HOST: ${{ vars.SONAR_HOST }}
   SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
-  SONAR_PROJECT_KEY: ${{ github.event.repository.name }}
+  SONAR_PROJECT_KEY: ${{ github.repository }}
 
 jobs:
   build:
