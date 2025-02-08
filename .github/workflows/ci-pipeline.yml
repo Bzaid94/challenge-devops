@@ -7,6 +7,11 @@ on:
     branches:
       - main
 
+env:
+  SONAR_HOST: ${{ vars.SONAR_HOST }}
+  SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
+  SONAR_PROJECT_KEY: ${{ github.event.repository.name }}
+
 jobs:
   build:
     name: CI/CD Pipeline
@@ -28,3 +33,12 @@ jobs:
 
       - name: Run test units
         run: mvn verify
+
+      - name: Analysis with SonarCloud
+        run: |
+          mvn sonar:sonar \
+          -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
+          -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
+          -Dsonar.host.url=${{ env.SONAR_HOST }} \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
