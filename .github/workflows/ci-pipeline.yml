@@ -37,7 +37,7 @@ jobs:
 
       - name: Analysis with SonarCloud
         run: |
-          mvn clean verify sonar:sonar \
+          mvn sonar:sonar \
           -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
           -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
           -Dsonar.host.url=${{ env.SONAR_HOST }} \
@@ -49,4 +49,4 @@ jobs:
         run: docker build -t ${{ env.DOCKER_IMAGE }}:latest .
 
       - name: Login to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
