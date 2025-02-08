@@ -41,4 +41,5 @@ jobs:
           -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
           -Dsonar.host.url=${{ env.SONAR_HOST }} \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.branch.name=${{ github.head_ref }} \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
