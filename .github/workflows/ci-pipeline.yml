@@ -43,3 +43,6 @@ jobs:
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.branch.name=main \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+
+      - name: Build Docker image
+        run: docker build -t demo-devops-java:latest .
