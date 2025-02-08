@@ -6,6 +6,10 @@ on:
       [opened, synchronize, reopened]
     branches:
       - main
+env:
+  SONAR_HOST: ${{ vars.SONAR_HOST }}
+  SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
+  SONAR_PROJECT_KEY: ${{ github.repository }}
 
 jobs:
   build:
@@ -22,8 +26,12 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Compile project
-        run: mvn clean compile -DskipTests
+      - name: Build project maven
+        run: mvn clean verify
 
-      - name: Run Unit Tests
-        run: mvn verify
+      - name: Analysis with SonarCloud
+        run: mvn sonar:sonar \
+          -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
+          -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
+          -Dsonar.host.url=${{ env.SONAR_HOST }} \
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
