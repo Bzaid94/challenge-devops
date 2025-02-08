@@ -23,4 +23,4 @@ jobs:
           cache: maven
 
       - name: Compile project
-        run: mvn compile -DskipTests
+        run: mvn clean compile -DskipTests
