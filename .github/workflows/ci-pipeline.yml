@@ -27,6 +27,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          architecture: 'arm64'
           cache: maven
 
       - name: Build project maven
@@ -47,7 +48,7 @@ jobs:
 
   docker-build:
     name: Build & Push Docker
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: build-and-analysis
 
     steps:
