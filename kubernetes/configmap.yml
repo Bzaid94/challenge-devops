@@ -4,4 +4,4 @@ metadata:
   name: demo-config
 data:
   SERVER_PORT: "8000"
-  DB_URL: "jdbc:h2:file:./test"
+  DB_URL: "jdbc:h2:file:/data/test"
