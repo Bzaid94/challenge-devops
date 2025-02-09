@@ -9,7 +9,6 @@ on:
 
 env:
   SONAR_HOST: ${{ vars.SONAR_HOST }}
-  SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
   SONAR_PROJECT_KEY: ${{ github.event.repository.name }}
   DOCKER_IMAGE: demo-devops-java
 
@@ -40,10 +39,8 @@ jobs:
         run: |
           mvn sonar:sonar \
           -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
-          -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
           -Dsonar.host.url=${{ env.SONAR_HOST }} \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
-          -Dsonar.branch.name=master \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
   docker-build:
