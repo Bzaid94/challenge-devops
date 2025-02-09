@@ -16,7 +16,7 @@ env:
 jobs:
   build-and-analysis:
     name: Build & Analysis
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -47,7 +47,7 @@ jobs:
 
   docker-build:
     name: Build & Push Docker
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build-and-analysis
 
     steps:
@@ -97,7 +97,7 @@ jobs:
 
   k8s-deploy:
     name: Deploy to Kubernetes
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: docker-build
 
     steps:
