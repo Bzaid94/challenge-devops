@@ -22,6 +22,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: demo-config
+                  key: SERVER_PORT
+            - name: NAME_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config
                   key: DB_URL
             - name: USERNAME_DB
               valueFrom:
