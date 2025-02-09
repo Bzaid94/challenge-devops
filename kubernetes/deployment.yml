@@ -26,12 +26,12 @@ spec:
             - name: USERNAME_DB
               valueFrom:
                 secretKeyRef:
-                  name: demo-secrets
+                  name: demo-secret
                   key: USERNAME_DB
             - name: PASSWORD_DB
               valueFrom:
                 secretKeyRef:
-                  name: demo-secrets
+                  name: demo-secret
                   key: PASSWORD_DB
           livenessProbe:
             httpGet:
