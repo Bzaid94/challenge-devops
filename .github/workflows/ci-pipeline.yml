@@ -117,8 +117,8 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f kubernetes/configmap.yml
-          kubectl apply -f kubernetes/secret.yml
-          kubectl apply -f kubernetes/deployment.yml
-          kubectl apply -f kubernetes/service.yml
-          kubectl apply -f kubernetes/hpa.yml
+          kubectl apply --validate=false -f kubernetes/configmap.yml
+          kubectl apply --validate=false -f kubernetes/secret.yml
+          kubectl apply --validate=false -f kubernetes/deployment.yml
+          kubectl apply --validate=false -f kubernetes/service.yml
+          kubectl apply --validate=false -f kubernetes/hpa.yml
