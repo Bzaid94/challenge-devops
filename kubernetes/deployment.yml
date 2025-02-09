@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-devops-java
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-devops
+  template:
+    metadata:
+      labels:
+        app: demo-devops
+    spec:
+      containers:
+        - name: demo-container
+          image: bzaid94/demo-devops-java:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: demo-config
+                  key: DB_URL
+            - name: USERNAME_DB
+              valueFrom:
+                secretKeyRef:
+                  name: demo-secrets
+                  key: USERNAME_DB
+            - name: PASSWORD_DB
+              valueFrom:
+                secretKeyRef:
+                  name: demo-secrets
+                  key: PASSWORD_DB
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
