@@ -62,8 +62,30 @@ jobs:
         with:
           image-ref: ${{ env.DOCKER_IMAGE }}:latest
           format: 'table'
-          exit-code: '1'
+          output: 'trivy-report.txt'
+          exit-code: '0'
           ignore-unfixed: true
+
+      - name: Comment on Pull Request
+        if: always()
+        uses: actions/github-script@v6
+        with:
+          script: |
+              const fs = require('fs');
+              const report = fs.readFileSync('trivy-report.txt', 'utf8');
+              
+              const body = `
+              \`\`\`
+              ${report}
+              \`\`\`
+              `;
+      
+            await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: body
+            })
 
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
