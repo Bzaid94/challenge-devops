@@ -40,13 +40,13 @@ spec:
                   key: PASSWORD_DB
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /api/actuator/health/liveness
               port: 8000
             initialDelaySeconds: 15
             periodSeconds: 20
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /api/actuator/health/readiness
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
