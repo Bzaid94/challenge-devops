@@ -114,6 +114,7 @@ Se crearon los siguientes archivos de configuración:
 
 ## Requisitos para Ejecutar Localmente
 - Clonar el repositorio
+- Subir a un repositorio en GitHub
 - Configurar un runner en GitHub self-hosted (en caso no se cuente con recursos en la nube)
 - Kubernetes con Minikube o Docker Desktop.
 - Configurar las variables de entorno necesarias:
